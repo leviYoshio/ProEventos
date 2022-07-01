@@ -16,6 +16,7 @@ export class EventoListaComponent implements OnInit {
   public modalRef = {} as BsModalRef;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+  public eventoId = 0;
 
   public larguraImg = 150;
   public margemImg = 2;
@@ -36,19 +37,19 @@ export class EventoListaComponent implements OnInit {
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private router : Router
+    private router: Router
     ) { }
 
   public ngOnInit(): void {
     this.spinner.show();
-    this.getEventos();
+    this.carregarEventos();
   }
 
   public alterarImagem(): void{
     this.exibirImg = !this.exibirImg;
   }
 
-  public getEventos(): void {
+  public carregarEventos(): void {
     this.eventoService.getEventos().subscribe({
       next: (eventos: Evento[]) => {
         this.eventos = eventos;
@@ -71,20 +72,37 @@ export class EventoListaComponent implements OnInit {
   }
 
   // Botão
-  public openModal(template: TemplateRef<any>): void{
+  public openModal(event: any, template: TemplateRef<any>, eventoId: number): void{
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   public confirm(): void {
     this.modalRef.hide();
-    this.toastr.success('O Evento foi deletado com sucesso', 'Deletado!');
+    this.spinner.show();
+    this.eventoService.deleteEvento(this.eventoId).subscribe({
+      next: (result: any) => {
+        if (result.message === 'Deletado'){
+          this.toastr.success('O Evento foi deletado com sucesso', 'Deletado!');
+          this.carregarEventos();
+        }
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.toastr.error(`Erro ao tentar deletar o evento ${this.eventoId}`, 'Erro!');
+      },
+      complete: () => { }
+    }).add(() => { this.spinner.hide(); });
+
+
   }
 
   public decline(): void {
     this.modalRef.hide();
   }
 
-  //Redirecionamento de rota
+  // Redirecionamento de rota
   public detalheEvento(id: number): void{
     this.router.navigate([`eventos/detalhe/${id}`]);
   }
