@@ -9,7 +9,7 @@
 
 	<div class="col-md-6">
 
-		<form [formGroup]="form" class="p-1">
+		<form [formGroup]="form" class="p-1" (ngSubmit)="register()">
       <div class="pb-2 d-block d-md-none">
         <h3 class="border-bottom">Cadastro de Usuário</h3>
       </div>
@@ -39,16 +39,16 @@
       <div class="form-row">
         <div class="form-group col-sm-6">
           <label for="">Senha:</label>
-          <input class="form-control" type="password" [ngClass]="{'is-invalid': f.senha?.errors && f.senha?.touched}" formControlName="senha" placeholder="Digite uma Senha" />
-          <div *ngIf="f.senha.errors?.required" class="invalid-feedback"> Senha é obrigatório</div>
-          <div *ngIf="f.senha.errors?.minlength" class="invalid-feedback"> A senha deve conter no mínimo 6 caracteres</div>
+          <input class="form-control" type="password" [ngClass]="{'is-invalid': f.password?.errors && f.password?.touched}" formControlName="password" placeholder="Digite uma Senha" />
+          <div *ngIf="f.password.errors?.required" class="invalid-feedback"> Senha é obrigatório</div>
+          <div *ngIf="f.password.errors?.minlength" class="invalid-feedback"> A senha deve conter no mínimo 6 caracteres</div>
         </div>
         <div class="form-group col-sm-6">
           <label for="">Confirmar Senha:</label>
-          <input class="form-control" type="password" [ngClass]="{'is-invalid': f.confirmeSenha?.errors && f.confirmeSenha?.touched}" formControlName="confirmeSenha" placeholder="Confirme a Senha" />
-          <div *ngIf="f.confirmeSenha.errors?.required" class="invalid-feedback"> A Senha é obrigatória</div>
-          <div *ngIf="f.confirmeSenha.errors?.minlength" class="invalid-feedback"> A senha deve conter no mínimo 6 caracteres</div>
-          <div *ngIf="f.confirmeSenha.errors?.mustMatch" class="invalid-feedback"> Repetir a senha é obrigatório</div>
+          <input class="form-control" type="password" [ngClass]="{'is-invalid': f.confirmePassword?.errors && f.confirmePassword?.touched}" formControlName="confirmePassword" placeholder="Confirme a Senha" />
+          <div *ngIf="f.confirmePassword.errors?.required" class="invalid-feedback"> A Senha é obrigatória</div>
+          <div *ngIf="f.confirmePassword.errors?.minlength" class="invalid-feedback"> A senha deve conter no mínimo 6 caracteres</div>
+          <div *ngIf="f.confirmePassword.errors?.mustMatch" class="invalid-feedback"> Repetir a senha é obrigatório</div>
         </div>
       </div>
       <div class="form-row p-1 mb-3">
@@ -59,7 +59,7 @@
       </div>
       <div class="form-row">
         <div class="form-group col-12">
-          <button class="btn btn-lg btn-success btn-block px-5" [disabled]="!form.valid">
+          <button class="btn btn-lg btn-success btn-block px-5" [disabled]="!form.valid" type="submit">
             Registar
           </button>
         </div>
