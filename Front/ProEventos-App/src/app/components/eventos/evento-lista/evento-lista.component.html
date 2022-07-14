@@ -19,7 +19,7 @@
         <b class="ml-1 d-none d-sm-block">Novo</b>
       </a>
     </div>
-    </div>
+  </div>
   <!-- <h3>Filtro: {{filtroLista}}</h3> -->
   <table class="table table-striped table-hover">
     <thead class="thead-dark">
@@ -75,20 +75,20 @@
 <div class="d-flex justify-content-center">
 
   <pagination
-    [boundaryLinks]="true"
+  [boundaryLinks]="true"
 
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
+  [totalItems]="pagination.totalItems"
+  [itemsPerPage]="pagination.itemsPerPage"
+  [(ngModel)]="pagination.currentPage"
+  (pageChanged)="pageChanged($event)"
 
-    pageBtnClass="btn"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;">
+  pageBtnClass="btn"
+  previousText="&lsaquo;"
+  nextText="&rsaquo;"
+  firstText="&laquo;"
+  lastText="&raquo;">
 
-  </pagination>
+</pagination>
 
 </div>
 

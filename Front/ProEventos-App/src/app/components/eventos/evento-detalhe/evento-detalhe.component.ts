@@ -69,7 +69,7 @@ export class EventoDetalheComponent implements OnInit {
         next: (evento: Evento) => {
           this.evento = { ... evento }; // {... NOME} cria uma cópia e não uma referencia/associação
           this.form.patchValue(this.evento);
-          if(this.evento.imagemURL !== ''){
+          if (this.evento.imagemURL !== ''){
             this.imagemURL = environment.apiURL + 'resources/images/' + this.evento.imagemURL;
           }
           this.evento.lotes.forEach( lote => {
